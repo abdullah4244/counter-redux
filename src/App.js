@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import {useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 function App() {
+
+ const dispatch = useDispatch();
+  const handleIncrement = () => {
+    dispatch({type:"INC",payload:3});
+  }
+  const handleDecrement = () => {
+    dispatch({type:"DEC",payload:1});
+  }
+  const state = useSelector((state)=>state);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      <div className="jumbotron container mt-5">
+        <h1>{state}</h1>
+        <div className="d-flex justify-content-center">
+          <button onClick = {handleIncrement} className="btn btn-success mr-2">Increment</button>
+          <button onClick = {handleDecrement} className="btn btn-danger">Decrement</button>
+        </div>
+      </div>
     </div>
   );
 }
